@@ -55,6 +55,20 @@ const handleUpdatePost = (id, params) => {
   })
 }
 
+const handleDestroyPost = (post) => {
+  // console.log('destroying post...')
+  console.log(post)
+  axios.delete(`http://localhost:3000/posts/${post.id}.json`).then(response => {
+    console.log(response.data)
+    // update the posts array
+    setPosts(posts.filter(r => r.id !== post.id))
+    // close the modal
+    closeModal()
+  })
+}
+
+
+
 useEffect(handleIndexPosts, [])
 
   return (
@@ -65,7 +79,7 @@ useEffect(handleIndexPosts, [])
       <button onClick={handleIndexPosts}>get the posts from the api</button>
       <PostsIndex posts={posts} onShowPosts={showModal}/>
       <Modal show={isPostsShowVisible} onClose={closeModal}>
-        <PostsShow post={currentPost} onUpdatePost={handleUpdatePost}/>
+        <PostsShow post={currentPost} onUpdatePost={handleUpdatePost} onDestroyPost={handleDestroyPost}/>
       </Modal>
     </div>
   );

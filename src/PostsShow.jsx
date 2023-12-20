@@ -7,6 +7,12 @@ export function PostsShow(props) {
     props.onUpdatePost(props.post.id, params)
       console.log('updating post...')
   }
+
+  const destroyPost = () => {
+    console.log('destroying post...')
+    props.onDestroyPost(props.post)
+  }
+
   return (
     <div>
       <p>posts show</p>
@@ -22,6 +28,8 @@ export function PostsShow(props) {
           <p>image: <input type="text" name="image" defaultValue={props.post.image}/></p>
           <button>Update Post</button>
         </form>
+        <br />
+        <button onClick={destroyPost}>Remove post</button>
       </div>
 
     </div>
