@@ -1,13 +1,9 @@
-import axios from 'axios'
-
-export function PostsNew() {
+export function PostsNew(props) {
   const createPost = (event) => {
     event.preventDefault()
     const params = new FormData(event.target)
-    axios.post("http://localhost:3000/posts.json", params).then(response => {
-      console.log(response.data)
-      window.location.href= "/"
-    })
+    props.onCreatePost(params)
+    event.target.reset()
     console.log('creating post...')
   }  
   
